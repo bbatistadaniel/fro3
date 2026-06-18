@@ -63,6 +63,31 @@ class MainState extends State<MainWidget> {
                           ),
                         ),
                       ),
+                      Row(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadiusGeometry.circular(10),
+                            child: SizedBox(
+                              width: 48,
+                              height: 48,
+                              child: ColoredBox(
+                                color: Color.fromARGB(255, 0, 110, 255),
+                                child: Container(
+                                  alignment: Alignment(0, 0),
+                                  child: Text(
+                                    "A",
+                                    style: TextStyle(
+                                      color: Color(0xFFFFFFFF),
+                                      fontSize: 20,
+                                      fontWeight: FontWeight(600)
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
