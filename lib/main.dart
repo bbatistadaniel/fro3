@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:number_text_input_formatter/number_text_input_formatter.dart";
+import 'package:share_plus/share_plus.dart';
 
 // Classes
 
@@ -146,6 +147,16 @@ class MainState extends State<MainWidget> {
                         text: "Value A",
                         onValueChanged: (value) {
                           valueA = value;
+                          if (valueB != null && valueC != null) {
+                            setState(() {
+                              resultField = calculate(
+                                valueA: valueA!,
+                                valueB: valueB!,
+                                valueC: valueC!,
+                                isInverted: invertProportionSwitch,
+                              ).toStringAsFixed(4);
+                            });
+                          }
                         },
                       ),
                       SizedBox(height: 10),
@@ -155,6 +166,16 @@ class MainState extends State<MainWidget> {
                         text: "Value B",
                         onValueChanged: (value) {
                           valueB = value;
+                          if (valueA != null && valueC != null) {
+                            setState(() {
+                              resultField = calculate(
+                                valueA: valueA!,
+                                valueB: valueB!,
+                                valueC: valueC!,
+                                isInverted: invertProportionSwitch,
+                              ).toStringAsFixed(4);
+                            });
+                          }
                         },
                       ),
                       SizedBox(height: 10),
@@ -164,6 +185,16 @@ class MainState extends State<MainWidget> {
                         text: "Value C",
                         onValueChanged: (value) {
                           valueC = value;
+                          if (valueB != null && valueA != null) {
+                            setState(() {
+                              resultField = calculate(
+                                valueA: valueA!,
+                                valueB: valueB!,
+                                valueC: valueC!,
+                                isInverted: invertProportionSwitch,
+                              ).toStringAsFixed(4);
+                            });
+                          }
                         },
                       ),
                       SizedBox(height: 5),
@@ -194,6 +225,18 @@ class MainState extends State<MainWidget> {
                               onChanged: (value) {
                                 setState(() {
                                   invertProportionSwitch = value;
+                                  if (valueA != null &&
+                                      valueB != null &&
+                                      valueC != null) {
+                                    setState(() {
+                                      resultField = calculate(
+                                        valueA: valueA!,
+                                        valueB: valueB!,
+                                        valueC: valueC!,
+                                        isInverted: invertProportionSwitch,
+                                      ).toStringAsFixed(4);
+                                    });
+                                  }
                                 });
                               },
                             ),
@@ -261,7 +304,13 @@ class MainState extends State<MainWidget> {
                                 borderRadius: BorderRadius.circular(8),
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              if (resultField != "-") {
+                                SharePlus.instance.share(
+                                  ShareParams(text: "${resultField}"),
+                                );
+                              }
+                            },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [

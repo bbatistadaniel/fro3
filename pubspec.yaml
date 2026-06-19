@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   number_text_input_formatter: ^1.0.0+9
+  share_plus: ^13.1.0
 
 dev_dependencies:
   flutter_test:
