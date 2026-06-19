@@ -1,8 +1,86 @@
 import "package:flutter/material.dart";
+import "package:number_text_input_formatter/number_text_input_formatter.dart";
 
 // Classes
 
+class ValueRow extends StatelessWidget {
+  final String letter;
+  final Color color;
+  final String text;
+  final ValueChanged<double?> onValueChanged;
+
+  const ValueRow({
+    super.key,
+    required this.letter,
+    required this.color,
+    required this.text,
+    required this.onValueChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Container(
+          margin: EdgeInsetsDirectional.only(start: 16, end: 16),
+          child: ClipRRect(
+            borderRadius: BorderRadiusGeometry.circular(10),
+            child: SizedBox(
+              width: 48,
+              height: 48,
+              child: ColoredBox(
+                color: color,
+                child: Container(
+                  alignment: Alignment(0, 0),
+                  child: Text(
+                    letter,
+                    style: TextStyle(
+                      color: Color(0xFFFFFFFF),
+                      fontSize: 20,
+                      fontWeight: FontWeight(600),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          child: Text(
+            text,
+            textAlign: TextAlign.start,
+            style: TextStyle(fontSize: 16),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(right: 16),
+          width: 200,
+          child: TextField(
+            onChanged: (value) {
+              onValueChanged(double.tryParse(value));
+            },
+            inputFormatters: [NumberTextInputFormatter(allowNegative: true)],
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(
+              hintText: "Type the value",
+              hintStyle: TextStyle(color: Color.fromARGB(85, 0, 0, 0)),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 class MainState extends State<MainWidget> {
+  // State variables
+
+  bool invertProportionSwitch = false;
+  String resultField = "-";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +124,6 @@ class MainState extends State<MainWidget> {
                 color: ColorScheme.of(context).surface,
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width * 0.9,
-                  height: 300,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -63,42 +140,77 @@ class MainState extends State<MainWidget> {
                           ),
                         ),
                       ),
+                      ValueRow(
+                        color: Color.fromARGB(255, 0, 74, 211),
+                        letter: "A",
+                        text: "Value A",
+                        onValueChanged: (value) {
+                          valueA = value;
+                        },
+                      ),
+                      SizedBox(height: 10),
+                      ValueRow(
+                        color: Color.fromARGB(255, 0, 179, 68),
+                        letter: "B",
+                        text: "Value B",
+                        onValueChanged: (value) {
+                          valueB = value;
+                        },
+                      ),
+                      SizedBox(height: 10),
+                      ValueRow(
+                        color: Color.fromARGB(255, 84, 0, 179),
+                        letter: "C",
+                        text: "Value C",
+                        onValueChanged: (value) {
+                          valueC = value;
+                        },
+                      ),
+                      SizedBox(height: 5),
+                      Divider(indent: 16, endIndent: 16),
+                      SizedBox(height: 5),
                       Row(
                         children: [
-                          ClipRRect(
-                            borderRadius: BorderRadiusGeometry.circular(10),
-                            child: SizedBox(
-                              width: 48,
-                              height: 48,
-                              child: ColoredBox(
-                                color: Color.fromARGB(255, 0, 110, 255),
-                                child: Container(
-                                  alignment: Alignment(0, 0),
-                                  child: Text(
-                                    "A",
-                                    style: TextStyle(
-                                      color: Color(0xFFFFFFFF),
-                                      fontSize: 20,
-                                      fontWeight: FontWeight(600)
-                                    ),
-                                  ),
-                                ),
-                              ),
+                          Container(
+                            alignment: Alignment(0, 0),
+                            margin: EdgeInsets.only(left: 16, right: 16),
+                            child: Icon(
+                              Icons.swap_horiz_rounded,
+                              size: 40,
+                              color: ColorScheme.of(context).primary,
+                            ),
+                          ),
+                          Expanded(
+                            child: Text(
+                              "Invert proportion",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(right: 16),
+                            child: Switch(
+                              value: invertProportionSwitch,
+                              onChanged: (value) {
+                                setState(() {
+                                  invertProportionSwitch = value;
+                                });
+                              },
                             ),
                           ),
                         ],
                       ),
+                      SizedBox(height: 10),
                     ],
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 10),
               Card.filled(
                 elevation: 2,
                 color: ColorScheme.of(context).surface,
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width * 0.9,
-                  height: 200,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -120,7 +232,9 @@ class MainState extends State<MainWidget> {
                           width: MediaQuery.of(context).size.width * 0.7,
                           height: 50,
                           child: TextField(
-                            controller: TextEditingController(text: "-"),
+                            controller: TextEditingController(
+                              text: resultField,
+                            ),
                             textAlign: TextAlign.center,
                             textAlignVertical: TextAlignVertical.top,
                             style: TextStyle(fontSize: 32),
@@ -128,7 +242,9 @@ class MainState extends State<MainWidget> {
                             readOnly: true,
                             canRequestFocus: false,
                             decoration: InputDecoration(
-                              border: OutlineInputBorder(),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
                             ),
                           ),
                         ),
@@ -139,22 +255,38 @@ class MainState extends State<MainWidget> {
                           width: MediaQuery.of(context).size.width * 0.7,
                           height: 50,
                           child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: ColorScheme.of(context).primary,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
                             onPressed: () {},
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(Icons.ios_share),
+                                Icon(
+                                  Icons.ios_share,
+                                  color: ColorScheme.of(context).onPrimary,
+                                ),
                                 SizedBox(width: 10),
-                                Text("Share result"),
+                                Text(
+                                  "Share result",
+                                  style: TextStyle(
+                                    color: ColorScheme.of(context).onPrimary,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
                         ),
                       ),
+                      SizedBox(height: 20),
                     ],
                   ),
                 ),
               ),
+              Spacer(),
             ],
           ),
         ),

@@ -123,6 +123,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.18.0"
+  number_text_input_formatter:
+    dependency: "direct main"
+    description:
+      name: number_text_input_formatter
+      sha256: "9f9bfd3950de5c451a0298e69a386c5be6ea623c1e992446b3bc5823ca01dde5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0+9"
   path:
     dependency: transitive
     description:
