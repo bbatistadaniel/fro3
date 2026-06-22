@@ -7,5 +7,6 @@
     "invertProportion": "Inverter proporção",
     "result": "Resultado",
     "shareResult": "Compartilhar resultado",
-    "decimalSeparator": ","
+    "decimalSeparator": ",",
+    "copied": "Copiado para a área de transferência."
 }

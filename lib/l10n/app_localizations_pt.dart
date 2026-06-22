@@ -34,4 +34,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get decimalSeparator => ',';
+
+  @override
+  String get copied => 'Copiado para a área de transferência.';
 }

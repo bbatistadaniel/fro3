@@ -34,4 +34,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get decimalSeparator => '.';
+
+  @override
+  String get copied => 'Copied to clipboard.';
 }

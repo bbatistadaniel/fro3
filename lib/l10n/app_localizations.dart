@@ -151,6 +151,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'.'**
   String get decimalSeparator;
+
+  /// No description provided for @copied.
+  ///
+  /// In en, this message translates to:
+  /// **'Copied to clipboard.'**
+  String get copied;
 }
 
 class _AppLocalizationsDelegate
