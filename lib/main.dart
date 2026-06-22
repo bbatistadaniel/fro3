@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:number_text_input_formatter/number_text_input_formatter.dart";
 import 'package:share_plus/share_plus.dart';
+import 'l10n/app_localizations.dart';
 
 // Classes
 
@@ -55,18 +56,20 @@ class ValueRow extends StatelessWidget {
         ),
         Container(
           margin: EdgeInsets.only(right: 16),
-          width: 200,
-          child: TextField(
-            onChanged: (value) {
-              onValueChanged(double.tryParse(value));
-            },
-            inputFormatters: [NumberTextInputFormatter(allowNegative: true)],
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              hintText: "Type the value",
-              hintStyle: TextStyle(color: Color.fromARGB(85, 0, 0, 0)),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
+          width: 150,
+          child: Expanded(
+            child: TextField(
+              onChanged: (value) {
+                onValueChanged(double.tryParse(value));
+              },
+              inputFormatters: [NumberTextInputFormatter(allowNegative: true)],
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                hintText: AppLocalizations.of(context)!.typeTheValue,
+                hintStyle: TextStyle(color: Color.fromARGB(85, 0, 0, 0)),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
               ),
             ),
           ),
@@ -91,7 +94,7 @@ class MainState extends State<MainWidget> {
         title: Column(
           children: [
             Text(
-              "Rule of 3",
+              AppLocalizations.of(context)!.ruleOf3,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight(600),
@@ -101,7 +104,7 @@ class MainState extends State<MainWidget> {
             ),
             SizedBox(height: 20),
             Text(
-              "Fill 3 values to calculate the fourth.",
+              AppLocalizations.of(context)!.fillValues,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight(400),
@@ -131,7 +134,7 @@ class MainState extends State<MainWidget> {
                       Container(
                         margin: EdgeInsets.all(16),
                         child: Text(
-                          "Values",
+                          AppLocalizations.of(context)!.values,
                           textAlign: TextAlign.left,
                           style: TextStyle(
                             fontWeight: FontWeight(700),
@@ -144,7 +147,7 @@ class MainState extends State<MainWidget> {
                       ValueRow(
                         color: Color.fromARGB(255, 0, 74, 211),
                         letter: "A",
-                        text: "Value A",
+                        text: "${AppLocalizations.of(context)!.value} A",
                         onValueChanged: (value) {
                           valueA = value;
                           if (valueB != null && valueC != null) {
@@ -163,7 +166,7 @@ class MainState extends State<MainWidget> {
                       ValueRow(
                         color: Color.fromARGB(255, 0, 179, 68),
                         letter: "B",
-                        text: "Value B",
+                        text: "${AppLocalizations.of(context)!.value} B",
                         onValueChanged: (value) {
                           valueB = value;
                           if (valueA != null && valueC != null) {
@@ -182,7 +185,7 @@ class MainState extends State<MainWidget> {
                       ValueRow(
                         color: Color.fromARGB(255, 84, 0, 179),
                         letter: "C",
-                        text: "Value C",
+                        text: "${AppLocalizations.of(context)!.value} C",
                         onValueChanged: (value) {
                           valueC = value;
                           if (valueB != null && valueA != null) {
@@ -213,7 +216,7 @@ class MainState extends State<MainWidget> {
                           ),
                           Expanded(
                             child: Text(
-                              "Invert proportion",
+                              AppLocalizations.of(context)!.invertProportion,
                               textAlign: TextAlign.left,
                               style: TextStyle(fontSize: 16),
                             ),
@@ -260,7 +263,7 @@ class MainState extends State<MainWidget> {
                       Container(
                         margin: EdgeInsets.all(16),
                         child: Text(
-                          "Result",
+                          AppLocalizations.of(context)!.result,
                           textAlign: TextAlign.left,
                           style: TextStyle(
                             fontWeight: FontWeight(700),
@@ -320,7 +323,7 @@ class MainState extends State<MainWidget> {
                                 ),
                                 SizedBox(width: 10),
                                 Text(
-                                  "Share result",
+                                  AppLocalizations.of(context)!.shareResult,
                                   style: TextStyle(
                                     color: ColorScheme.of(context).onPrimary,
                                   ),
@@ -377,5 +380,11 @@ double calculate({
 }
 
 void main() {
-  runApp(MaterialApp(home: MainWidget()));
+  runApp(
+    MaterialApp(
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      home: MainWidget(),
+    ),
+  );
 }
