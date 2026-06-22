@@ -145,6 +145,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Share result'**
   String get shareResult;
+
+  /// No description provided for @decimalSeparator.
+  ///
+  /// In en, this message translates to:
+  /// **'.'**
+  String get decimalSeparator;
 }
 
 class _AppLocalizationsDelegate

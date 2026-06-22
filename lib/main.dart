@@ -152,12 +152,13 @@ class MainState extends State<MainWidget> {
                           valueA = value;
                           if (valueB != null && valueC != null) {
                             setState(() {
-                              resultField = calculate(
-                                valueA: valueA!,
-                                valueB: valueB!,
-                                valueC: valueC!,
-                                isInverted: invertProportionSwitch,
-                              ).toStringAsFixed(4);
+                              resultField = removeFloatingZeros(
+                                calculateToString(
+                                  invertProportionSwitch,
+                                  context,
+                                ),
+                                AppLocalizations.of(context)!.decimalSeparator,
+                              );
                             });
                           }
                         },
@@ -171,12 +172,13 @@ class MainState extends State<MainWidget> {
                           valueB = value;
                           if (valueA != null && valueC != null) {
                             setState(() {
-                              resultField = calculate(
-                                valueA: valueA!,
-                                valueB: valueB!,
-                                valueC: valueC!,
-                                isInverted: invertProportionSwitch,
-                              ).toStringAsFixed(4);
+                              resultField = removeFloatingZeros(
+                                calculateToString(
+                                  invertProportionSwitch,
+                                  context,
+                                ),
+                                AppLocalizations.of(context)!.decimalSeparator,
+                              );
                             });
                           }
                         },
@@ -190,12 +192,13 @@ class MainState extends State<MainWidget> {
                           valueC = value;
                           if (valueB != null && valueA != null) {
                             setState(() {
-                              resultField = calculate(
-                                valueA: valueA!,
-                                valueB: valueB!,
-                                valueC: valueC!,
-                                isInverted: invertProportionSwitch,
-                              ).toStringAsFixed(4);
+                              resultField = removeFloatingZeros(
+                                calculateToString(
+                                  invertProportionSwitch,
+                                  context,
+                                ),
+                                AppLocalizations.of(context)!.decimalSeparator,
+                              );
                             });
                           }
                         },
@@ -232,12 +235,15 @@ class MainState extends State<MainWidget> {
                                       valueB != null &&
                                       valueC != null) {
                                     setState(() {
-                                      resultField = calculate(
-                                        valueA: valueA!,
-                                        valueB: valueB!,
-                                        valueC: valueC!,
-                                        isInverted: invertProportionSwitch,
-                                      ).toStringAsFixed(4);
+                                      resultField = removeFloatingZeros(
+                                        calculateToString(
+                                          invertProportionSwitch,
+                                          context,
+                                        ),
+                                        AppLocalizations.of(
+                                          context,
+                                        )!.decimalSeparator,
+                                      );
                                     });
                                   }
                                 });
@@ -365,6 +371,34 @@ double? valueC;
 // Objects
 
 // Methods
+
+String removeFloatingZeros(String input, String decimalSeparator) {
+  List<String> splitedInput = input.split(decimalSeparator);
+  String decimals = splitedInput[1].replaceFirst(RegExp(r'0+$'), '');
+  if (decimals.isEmpty) {
+    return splitedInput[0];
+  } else {
+    return "${splitedInput[0]}$decimalSeparator$decimals";
+  }
+}
+
+String calculateToString(bool invertProportionSwitch, BuildContext context) {
+  if (AppLocalizations.of(context)!.localeName == 'pt') {
+    return calculate(
+      valueA: valueA!,
+      valueB: valueB!,
+      valueC: valueC!,
+      isInverted: invertProportionSwitch,
+    ).toStringAsFixed(4).replaceAll('.', ',');
+  } else {
+    return calculate(
+      valueA: valueA!,
+      valueB: valueB!,
+      valueC: valueC!,
+      isInverted: invertProportionSwitch,
+    ).toStringAsFixed(4);
+  }
+}
 
 double calculate({
   required double valueA,

@@ -31,4 +31,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get shareResult => 'Compartilhar resultado';
+
+  @override
+  String get decimalSeparator => ',';
 }

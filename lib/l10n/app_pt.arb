@@ -6,5 +6,6 @@
     "values": "Valores",
     "invertProportion": "Inverter proporção",
     "result": "Resultado",
-    "shareResult": "Compartilhar resultado"
+    "shareResult": "Compartilhar resultado",
+    "decimalSeparator": ","
 }
