@@ -95,6 +95,12 @@ class MainState extends State<MainWidget> {
 
   // Class methods
 
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   double calculate({
     required double valueA,
     required double valueB,
