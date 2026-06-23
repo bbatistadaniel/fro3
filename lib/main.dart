@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
 import "package:number_text_input_formatter/number_text_input_formatter.dart";
@@ -423,7 +424,7 @@ class MainState extends State<MainWidget> {
                               onPressed: () {
                                 if (resultField != "-") {
                                   SharePlus.instance.share(
-                                    ShareParams(text: "${resultField}"),
+                                    ShareParams(text: resultField),
                                   );
                                 }
                               },
@@ -470,23 +471,26 @@ class MainWidget extends StatefulWidget {
   }
 }
 
-// Main method
+// Methods
 
-void main() async {
+Future<void> setupWindow() async {
   WidgetsFlutterBinding.ensureInitialized();
   await windowManager.ensureInitialized();
 
   WindowOptions windowOptions = WindowOptions(minimumSize: Size(360, 720));
 
   windowManager.waitUntilReadyToShow(windowOptions, () async {
-    await windowManager.show;
+    windowManager.show;
     await windowManager.focus();
   });
+}
 
+void main() {
   runApp(
     DynamicColorBuilder(
       builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
         return MaterialApp(
+          debugShowCheckedModeBanner: false,
           theme: ThemeData.from(
             colorScheme: ColorScheme.fromSeed(
               brightness: Brightness.light,
@@ -506,4 +510,6 @@ void main() async {
       },
     ),
   );
+
+  setupWindow();
 }

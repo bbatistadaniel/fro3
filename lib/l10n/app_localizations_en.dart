@@ -21,7 +21,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get value => 'Value';
 
   @override
-  String get values => 'Valores';
+  String get values => 'Values';
 
   @override
   String get invertProportion => 'Invert proportion';

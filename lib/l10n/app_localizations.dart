@@ -125,7 +125,7 @@ abstract class AppLocalizations {
   /// No description provided for @values.
   ///
   /// In en, this message translates to:
-  /// **'Valores'**
+  /// **'Values'**
   String get values;
 
   /// No description provided for @invertProportion.
