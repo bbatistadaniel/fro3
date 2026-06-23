@@ -1,7 +1,8 @@
+package: &package br.com.bbatistadaniel
 name: fro3
-description: "A new Flutter project."
+description: "Flutter Rule of 3 Calculator"
 publish_to: 'none'
-version: 0.1.0+1
+version: &version 1.0.1.0
 
 environment:
   sdk: ^3.12.1
@@ -23,7 +24,17 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
+  msix: ^3.17.0
 
 flutter:
   uses-material-design: true
   generate: true
+
+msix_config:
+  display_name: FRO3
+  publisher_display_name: "Daniel Batista Bueno"
+  identity_name: *package
+  msix_version: *version
+  logo_path: assets\icon.png
+  execution_alias: fro3
+  languages: en-us, en-uk, pt-br, pt-pt
