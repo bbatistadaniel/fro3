@@ -4,6 +4,7 @@ import "package:number_text_input_formatter/number_text_input_formatter.dart";
 import 'package:share_plus/share_plus.dart';
 import 'l10n/app_localizations.dart';
 import 'package:dynamic_color/dynamic_color.dart';
+import 'package:window_manager/window_manager.dart';
 
 // Classes
 
@@ -471,7 +472,17 @@ class MainWidget extends StatefulWidget {
 
 // Main method
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await windowManager.ensureInitialized();
+
+  WindowOptions windowOptions = WindowOptions(minimumSize: Size(360, 720));
+
+  windowManager.waitUntilReadyToShow(windowOptions, () async {
+    await windowManager.show;
+    await windowManager.focus();
+  });
+
   runApp(
     DynamicColorBuilder(
       builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
