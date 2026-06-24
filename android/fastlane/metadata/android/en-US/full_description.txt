@@ -1,0 +1,14 @@
+FRO3 is a simple and fast Rule of Three calculator.
+
+It helps calculate unknown values using direct or inverse proportions. Enter three values and FRO3 calculates the missing value instantly.
+
+Features:
+• Direct and inverse proportion calculations
+• Material 3 interface with light and dark themes
+• Dynamic colors support
+• English and Portuguese translations
+• Locale-aware decimal formatting
+• Copy and share calculation results
+• Desktop support with responsive layout
+
+The app works completely offline and does not require an account or internet connection.
