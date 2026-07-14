@@ -109,9 +109,15 @@ class MainState extends State<MainWidget> {
     required double valueC,
     bool isInverted = false,
   }) {
-    if (!isInverted) {
+    if (!isInverted) { // Zero denominator is undefined; app intentionally treats it as 0.
+      if (valueA == 0) {
+        return 0;
+      }
       return (valueB * valueC) / valueA;
     } else {
+      if (valueB == 0) {
+        return 0;
+      }
       return (valueA * valueC) / valueB;
     }
   }
