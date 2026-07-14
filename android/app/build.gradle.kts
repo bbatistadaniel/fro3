@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "br.com.bbatistadaniel.fro3"
+    namespace = "dev.bbatistadaniel.fro3"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
