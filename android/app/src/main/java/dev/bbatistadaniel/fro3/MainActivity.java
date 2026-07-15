@@ -1,4 +1,4 @@
-package br.com.bbatistadaniel.fro3;
+package dev.bbatistadaniel.fro3;
 
 import io.flutter.embedding.android.FlutterActivity;
 
