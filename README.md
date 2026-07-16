@@ -15,9 +15,9 @@ A modern, fast, and cross-platform **Rule of Three** calculator built using Flut
 
 | Light Theme | Dark Theme |
 |-------------|------------|
-|<img src="https://gitlab.com/-/project/83504316/uploads/d5e8a0c4289a8e1ca446b7133987ee72/flutter_01.png" width=250>|<img src="https://gitlab.com/-/project/83504316/uploads/87cfce1c1b7b103125bc4d9c0f30c605/flutter_02.png" width=250>|
-|<img src="https://gitlab.com/-/project/83504316/uploads/5d39e6a8ecf7ccb06a67168d1c9701d7/flutter_03.png" width=250>|<img src="https://gitlab.com/-/project/83504316/uploads/4ee88e8a4c8204e00238397067ba80d0/flutter_04.png" width=250>|
-|<img src="https://gitlab.com/-/project/83504316/uploads/78435806cfc65605b98ae580de9e12f9/flutter_05.png" width=250>|<img src="https://gitlab.com/-/project/83504316/uploads/51526a003a0ec867b5900dd0805fdedb/flutter_06.png" width=250>|
+|<img src="google_play_store/01.png" width=250>|<img src="google_play_store/02.png" width=250>|
+|<img src="google_play_store/03.png" width=250>|<img src="google_play_store/04.png" width=250>|
+|<img src="google_play_store/05.png" width=250>|<img src="google_play_store/06.png" width=250>|
 
 ---
 
